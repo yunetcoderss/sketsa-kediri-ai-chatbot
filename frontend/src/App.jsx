@@ -5,7 +5,6 @@ import ChatWidget from './components/ChatWidget';
 import ChatPanel from './components/ChatPanel';
 
 const App = () => {
-  // --- CHAT STATE ---
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [messages, setMessages] = useState(() => {
     const saved = localStorage.getItem('kediri_chat_history');
@@ -21,13 +20,11 @@ const App = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
 
-  // --- UI STATE ---
   const [faqOpenIndex, setFaqOpenIndex] = useState(0);
   const [sliderPos, setSliderPos] = useState(52);
   const isDragging = useRef(false);
   const sliderContainerRef = useRef(null);
 
-  // Inisialisasi Welcome Message
   useEffect(() => {
     if (messages.length === 0) {
       const welcomeMsg = {
@@ -40,7 +37,6 @@ const App = () => {
     }
   }, [messages.length]);
 
-  // Simpan history ke LocalStorage
   useEffect(() => {
     if (messages.length > 0) {
       localStorage.setItem('kediri_chat_history', JSON.stringify(messages));
@@ -53,7 +49,6 @@ const App = () => {
     }
   }, [isChatOpen]);
 
-  // --- BEFORE/AFTER SLIDER LOGIC ---
   const updateSliderPos = (clientX) => {
     if (!sliderContainerRef.current) return;
     const rect = sliderContainerRef.current.getBoundingClientRect();
@@ -89,7 +84,6 @@ const App = () => {
     window.addEventListener('touchend', handleMouseUp);
     window.addEventListener('touchmove', handleTouchMove, { passive: false });
 
-    // Animasi geser otomatis awal (Auto Demo)
     let auto = 52;
     let dir = 1;
     let ticks = 0;
@@ -134,7 +128,7 @@ const App = () => {
       const dx = (Math.random() - 0.5) * 46;
       const dy = (Math.random() - 0.5) * 46 - 14;
       const color = colors[Math.floor(Math.random() * colors.length)];
-      
+
       s.style.width = size + 'px';
       s.style.height = size + 'px';
       s.style.setProperty('--c', color);
@@ -143,10 +137,10 @@ const App = () => {
       s.style.setProperty('--dy', dy + 'px');
       s.style.left = x + 'px';
       s.style.top = y + 'px';
-      
+
       layer.appendChild(s);
       s.addEventListener('animationend', () => s.remove());
-      
+
       setTimeout(() => { if (s.parentNode) s.remove(); }, 1200);
     };
 
@@ -174,7 +168,6 @@ const App = () => {
     };
   }, []);
 
-  // --- API CHAT LOGIC ---
   const sendMessageToAI = async (text, currentHistory) => {
     setIsTyping(true);
     try {
@@ -209,7 +202,7 @@ const App = () => {
       console.error('Chat API Error:', error);
       const errorMessage = {
         sender: 'bot',
-        text: `⚠️ **Gagal memuat respon AI.**\n\n${error.message}\n\n*Silakan periksa apakah GROQ_API_KEY di file \`.env\` sudah terisi dengan benar.*`,
+        text: `⚠️ **Gagal memuat respon.**\n\n${error.message}\n\n*Silakan periksa apakah GROQ_API_KEY di file \`.env\` sudah terisi dengan benar.*`,
         timestamp: new Date().toISOString()
       };
       setMessages(prev => [...prev, errorMessage]);
@@ -246,24 +239,20 @@ const App = () => {
   };
 
   const handleClearHistory = () => {
-    if (window.confirm("Apakah Kakak yakin ingin menghapus semua riwayat percakapan?")) {
-      localStorage.removeItem('kediri_chat_history');
-      const welcomeMsg = {
-        sender: 'bot',
-        text: 'Halo saya Yuni! Selamat datang di **Sketsa Wajah Kediri**. 🎨 Ada yang bisa saya bantu hari ini?',
-        timestamp: new Date().toISOString()
-      };
-      setMessages([welcomeMsg]);
-      setUnreadCount(0);
-    }
+    localStorage.removeItem('kediri_chat_history');
+    const welcomeMsg = {
+      sender: 'bot',
+      text: 'Halo saya Yuni! Selamat datang di **Sketsa Wajah Kediri**. 🎨 Ada yang bisa saya bantu hari ini?',
+      timestamp: new Date().toISOString()
+    };
+    setMessages([welcomeMsg]);
+    setUnreadCount(0);
   };
 
-  // --- FAQ LOGIC ---
   const toggleFaq = (index) => {
     setFaqOpenIndex(faqOpenIndex === index ? -1 : index);
   };
 
-  // --- GALLERY IMAGES ---
   const galleryItems = [
     { tag: 'Potret Solo', price: '+Rp0', url: 'https://res.cloudinary.com/dpdzxeukl/image/upload/v1783505180/ilustrasi/x8kw4rvertca9irt0trd.jpg' },
     { tag: 'Pasangan', price: '+Rp5.000', url: 'https://res.cloudinary.com/dpdzxeukl/image/upload/v1783507109/ilustrasi/p1ztzzon8qbgpjhtjjsx.png' },
@@ -272,10 +261,8 @@ const App = () => {
 
   return (
     <div className="app-layout">
-      {/* GLITTER LAYER FOR SPARKLE TRAIL */}
       <div className="glitter-layer" id="glitterLayer" aria-hidden="true"></div>
 
-      {/* HEADER / NAV */}
       <header>
         <nav>
           <a href="#" className="logo">
@@ -301,7 +288,6 @@ const App = () => {
         </nav>
       </header>
 
-      {/* HERO SECTION */}
       <section className="hero">
         <div className="wrap hero-grid">
           <div>
@@ -324,12 +310,11 @@ const App = () => {
           </div>
 
           <div>
-            <div 
-              className="compare" 
-              id="compare" 
+            <div
+              className="compare"
+              id="compare"
               ref={sliderContainerRef}
             >
-              {/* Draft Grid SVG (Left Part) */}
               <div className="compare-layer layer-photo">
                 <svg viewBox="0 0 400 500" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
                   <rect width="400" height="500" fill="#FFFFFF" />
@@ -352,25 +337,23 @@ const App = () => {
                 </svg>
               </div>
 
-              {/* Finished Grayscale Sketch Image (Right Part) */}
-              <div 
-                className="compare-layer layer-sketch" 
+              <div
+                className="compare-layer layer-sketch"
                 id="sketchLayer"
                 style={{ clipPath: `inset(0 0 0 ${sliderPos}%)` }}
               >
-                <img 
-                  className="grayscale-img" 
-                  src="https://res.cloudinary.com/dpdzxeukl/image/upload/v1783505209/ilustrasi/mghtr4xhtdlyfq0w9r6c.jpg" 
-                  alt="Contoh hasil sketsa wajah karya Sketsa Wajah Kediri" 
+                <img
+                  className="grayscale-img"
+                  src="https://res.cloudinary.com/dpdzxeukl/image/upload/v1783505209/ilustrasi/mghtr4xhtdlyfq0w9r6c.jpg"
+                  alt="Contoh hasil sketsa wajah karya Sketsa Wajah Kediri"
                 />
               </div>
 
               <span className="compare-tag tag-foto">Sketsa Kasar</span>
               <span className="compare-tag tag-sketsa">Hasil Akhir</span>
-              
-              {/* Slider Handle */}
-              <div 
-                className="handle" 
+
+              <div
+                className="handle"
                 id="handle"
                 style={{ left: `${sliderPos}%` }}
                 onMouseDown={handleMouseDown}
@@ -388,10 +371,8 @@ const App = () => {
         </div>
       </section>
 
-      {/* CATALOG / PRICELIST COMPONENT */}
       <Catalog onAskAI={handleAskAIForProduct} />
 
-      {/* CARA KERJA SECTION */}
       <section id="cara-kerja">
         <div className="wrap">
           <div className="section-head">
@@ -427,7 +408,6 @@ const App = () => {
         </div>
       </section>
 
-      {/* GALLERY SECTION */}
       <section id="galeri" className="alt">
         <div className="wrap">
           <div className="section-head">
@@ -445,7 +425,7 @@ const App = () => {
                   <span className="tag">{item.tag}</span>
                   <span className="price">{item.price}</span>
                 </div>
-                <button 
+                <button
                   className="btn-ask-gallery"
                   onClick={() => handleAskAIForProduct({ name: item.tag })}
                 >
@@ -458,7 +438,6 @@ const App = () => {
         </div>
       </section>
 
-      {/* TESTIMONI SECTION */}
       <section id="testimoni">
         <div className="wrap">
           <div className="section-head center">
@@ -494,7 +473,6 @@ const App = () => {
         </div>
       </section>
 
-      {/* FAQ SECTION */}
       <section id="faq" className="alt">
         <div className="wrap">
           <div className="section-head center">
@@ -555,15 +533,14 @@ const App = () => {
         </div>
       </section>
 
-      {/* CTA BAND */}
       <section className="cta-band" id="pesan">
         <div className="wrap">
           <h2>Siap mengabadikan wajah kesayanganmu?</h2>
           <p>Kirim foto referensimu sekarang, seniman kami akan membalas dalam 1x24 jam.</p>
-          <a 
+          <a
             href="https://wa.me/6281946174344?text=Halo%20Admin%20Sketsa%20Wajah%20Kediri,%20saya%20tertarik%20untuk%20memesan%20sketsa%20wajah"
-            target="_blank" 
-            rel="noopener noreferrer" 
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn btn-ghost"
           >
             Mulai Pesan via WhatsApp
@@ -571,7 +548,6 @@ const App = () => {
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer>
         <div className="wrap">
           <div className="footer-grid">
@@ -620,15 +596,14 @@ const App = () => {
         </div>
       </footer>
 
-      {/* FLOATING CHAT WIDGET & PANEL */}
-      <ChatWidget 
-        isOpen={isChatOpen} 
-        onClick={() => setIsChatOpen(!isChatOpen)} 
+      <ChatWidget
+        isOpen={isChatOpen}
+        onClick={() => setIsChatOpen(!isChatOpen)}
         unreadCount={unreadCount}
       />
-      
-      <ChatPanel 
-        isOpen={isChatOpen} 
+
+      <ChatPanel
+        isOpen={isChatOpen}
         onClose={() => setIsChatOpen(false)}
         messages={messages}
         onSendMessage={handleSendMessage}
