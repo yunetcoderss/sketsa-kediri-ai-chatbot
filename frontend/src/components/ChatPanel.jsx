@@ -89,7 +89,7 @@ const ChatPanel = ({ isOpen, onClose, messages, onSendMessage, isTyping, onQuick
                         <div className="inline-prod-footer">
                           <span className="inline-prod-price">Mulai {Object.values(product.price)[0]}</span>
                           <a 
-                            href={`https://wa.me/6281946174344?text=Halo%20Admin%20Sketsa%20Wajah%20Studio,%20saya%20tertarik%20untuk%20memesan%20${encodeURIComponent(product.name)}`}
+                            href={`https://wa.me/6281946174344?text=Halo%20Admin%20Sketsa%20Wajah%20Custom,%20saya%20tertarik%20untuk%20memesan%20${encodeURIComponent(product.name)}`}
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="btn-order-now"

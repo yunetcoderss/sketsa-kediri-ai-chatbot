@@ -412,7 +412,7 @@ const App = () => {
         <div className="wrap">
           <div className="section-head">
             <span className="eyebrow">Galeri karya</span>
-            <h2>Beberapa goresan dari studio kami</h2>
+            <h2>Beberapa goresan dari sketsa kami</h2>
             <p>Contoh hasil sketsa dari berbagai kategori. Harga di bawah adalah <strong>biaya tambahan</strong> di luar harga dasar pada pricelist, tergantung jumlah wajah dan kompleksitas komposisi.</p>
           </div>
           <div className="gallery-grid">
@@ -560,7 +560,7 @@ const App = () => {
                 Sketsa Wajah <em>Kediri</em>
               </a>
               <p style={{ fontSize: '.88rem', color: 'var(--graphite)', maxWidth: '32ch', lineHeight: '1.6' }}>
-                Studio sketsa wajah custom — mengubah foto jadi karya tangan yang bisa disimpan seumur hidup.
+                Jasa Sketsa wajah custom — mengubah foto jadi karya tangan yang bisa disimpan seumur hidup.
               </p>
             </div>
             <div>

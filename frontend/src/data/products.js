@@ -23,7 +23,7 @@ export const pricelist = {
 export const products = [
   {
     id: "sketsa-solo",
-    name: "Potret Solo",
+    name: "Potret",
     category: "Opsi Tambahan",
     description: "Sketsa potret 1 wajah tunggal (Solo) tanpa biaya tambahan.",
     price: { "Biaya Tambahan": "+Rp0" },
@@ -39,7 +39,7 @@ export const products = [
     price: { "Biaya Tambahan": "+Rp5.000" },
     features: ["Menggambar 2 wajah", "Biaya tambahan Rp5.000", "Cocok untuk kado couple"],
     duration: "3-5 Hari Kerja",
-    image: "https://res.cloudinary.com/dpdzxeukl/image/upload/v1783505196/ilustrasi/juqgeldo9rln97ooltko.jpg"
+    image: "https://res.cloudinary.com/dpdzxeukl/image/upload/v1783507109/ilustrasi/p1ztzzon8qbgpjhtjjsx.png"
   },
   {
     id: "sketsa-background",
@@ -49,6 +49,6 @@ export const products = [
     price: { "Biaya Tambahan": "+Rp10.000" },
     features: ["Latar belakang kustom", "Biaya tambahan Rp10.000", "Lebih hidup & tematik"],
     duration: "3-5 Hari Kerja",
-    image: "https://res.cloudinary.com/dpdzxeukl/image/upload/v1783505209/ilustrasi/mghtr4xhtdlyfq0w9r6c.jpg"
+    image: "https://res.cloudinary.com/dpdzxeukl/image/upload/v1783506784/ilustrasi/hpi25zr8d9jp5qjftfeo.png"
   }
 ];
