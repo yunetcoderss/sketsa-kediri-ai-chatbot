@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://backend-kamu.vercel.app/api/:path*"
+      "destination": "https://sketsa-kediri-ai-chatbot.vercel.app/api/:path*"
     }
   ],
     "routes": [
